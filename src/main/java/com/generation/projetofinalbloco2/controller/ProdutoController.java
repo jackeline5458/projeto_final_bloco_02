@@ -39,10 +39,10 @@ public class ProdutoController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Produto post(@Valid @RequestBody Produto produtos) {
+	public Produto post(@Valid @RequestBody Produto produto) {
 
-	    if (categoriaRepository.existsById(produtos.getCategoria().getId()))
-	        return repository.save(produtos);
+	    if (categoriaRepository.existsById(produto.getCategoria().getId()))
+	        return repository.save(produto);
 
 	    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não existe");
 	}
