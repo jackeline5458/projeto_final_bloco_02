@@ -1,6 +1,6 @@
 package com.generation.projetofinalbloco2.model;
 
-import java.util.List;
+import java.math.BigDecimal;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -8,25 +8,32 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name = "tb_categorias")
-public class Categoria {
-	
+@Table(name = "tb_produtos")
+public class Produto {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@NotBlank
 	@Size(min = 3, max = 100)
 	private String nome;
-	
-	@Size(max = 255)
+
+	@NotBlank
+	@Size(min = 10, max = 255)
 	private String descricao;
+
+	@NotNull
+	private BigDecimal preco;
+
+	private int quantidade;
 
 	public Long getId() {
 		return id;
@@ -51,17 +58,34 @@ public class Categoria {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
 	
-	@OneToMany(mappedBy = "categoria")
-	@JsonIgnoreProperties("categoria")
-	private List<Produto> produtos;
+	@ManyToOne
+	@JsonIgnoreProperties("produtos")
+	private Categoria categoria;
 
-	public List<Produto> getProdutos() {
-	    return produtos;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-	    this.produtos = produtos;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
+	
 
 }
