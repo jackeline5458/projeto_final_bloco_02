@@ -75,12 +75,14 @@ public class Produto {
 		this.quantidade = quantidade;
 	}
 	
+	
 	@ManyToOne
 	@JsonIgnoreProperties("produtos")
 	private Categoria categoria;
 
 	public Categoria getCategoria() {
 		return categoria;
+		
 	}
 
 	public void setCategoria(Categoria categoria) {

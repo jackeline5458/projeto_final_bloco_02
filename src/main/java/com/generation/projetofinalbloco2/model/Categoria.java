@@ -52,6 +52,7 @@ public class Categoria {
 		this.descricao = descricao;
 	}
 	
+	
 	@OneToMany(mappedBy = "categoria")
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produtos;
